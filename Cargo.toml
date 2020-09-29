@@ -1,5 +1,5 @@
 [package]
-name = "grrs"
+name = "rusty-weather"
 version = "0.1.0"
 authors = ["Thomas Chaplin <thomaschaplin@outlook.com>"]
 edition = "2018"
@@ -7,3 +7,10 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+structopt = "0.3.18"
+exitfailure = "0.5.1"
+reqwest = { version = "0.10.8", features = ["json"] }
+serde = "1.0.116"
+serde_json = "1.0.57"
+serde_derive = "1.0.116"
+tokio = { version = "0.2.22", features = ["full"] }

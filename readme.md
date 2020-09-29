@@ -1,20 +1,25 @@
-# grrs
+# rusty-weather
 
-Simple implementation of the classic `grep` written in [rust](https://www.rust-lang.org/)
+Simple weather cli written in [rust](https://www.rust-lang.org/)
 
 ## Setup
 
 Make sure you have [rust](https://www.rust-lang.org/) installed on your machine by following the [getting started guide](https://www.rust-lang.org/learn/get-started)
 
+Get an API key from [OpenWeather](https://openweathermap.org/)
+
 ## Instructions
 
-* Clone this repository `git clone git@github.com:thomaschaplin/grrs.git`
-* Change directory `cd grrs`
+* Clone this repository `git clone git@github.com:thomaschaplin/rusty-weather.git`
+* Change directory `cd rusty-weather`
 * Build the application `cargo build`
-* Run the application `cargo run`
+* Run the application `cargo run <city> <country_code> <api_key>`
 
-#### Expected output:
+#### Example output:
 
 ```
-TBC
+City: London
+Country Code: GB
+Humidity: 77%
+Description: scattered clouds
 ```
