@@ -21,5 +21,5 @@ Get an API key from [OpenWeather](https://openweathermap.org/)
 City: London
 Country Code: GB
 Humidity: 77%
-Description: scattered clouds
+Weather Description: scattered clouds
 ```
