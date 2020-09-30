@@ -20,6 +20,14 @@ Get an API key from [OpenWeather](https://openweathermap.org/)
 ```
 City: London
 Country Code: GB
-Humidity: 77%
-Weather Description: scattered clouds
+Humidity: 87%
+Weather Description: light rain
+Wind Speed: 16.56kmh
+Wind Direction: South
+Temperature: 15.49°C
+Minimum Temperature: 15.00°C
+Maximum Temperature: 16.11°C
+Feels Like: 13.31°C
+Sunrise: 2020-09-30 05:59:58 UTC
+Sunset: 2020-09-30 17:40:41 UTC
 ```

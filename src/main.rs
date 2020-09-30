@@ -1,3 +1,4 @@
+use chrono::prelude::*;
 use exitfailure::ExitFailure;
 use reqwest::Url;
 use serde_derive::{Deserialize, Serialize};
@@ -72,8 +73,8 @@ struct Sys {
     r#type: f64,
     id: i32,
     country: String,
-    sunrise: i32,
-    sunset: i32,
+    sunrise: i64,
+    sunset: i64,
 }
 
 impl Forecast {
@@ -93,16 +94,62 @@ impl Forecast {
     }
 }
 
+fn miles_per_second_to_kmh(inputspeed: f64) -> f64 {
+    inputspeed * 3.6
+}
+
+fn degrees_to_compass(deg: i32) -> &'static str {
+    match deg {
+        00..=21 => return "North",
+        22..=43 => return "North Northeast",
+        44..=45 => return "North East",
+        46..=66 => return "East Northeast",
+        67..=111 => return "East",
+        112..=133 => return "East Southeast",
+        134..=135 => return "Southeast",
+        136..=156 => return "South Southeast",
+        157..=201 => return "South",
+        202..=223 => return "South Southwest",
+        224..=225 => return "Southwest",
+        226..=246 => return "West Southwest",
+        247..=291 => return "West",
+        292..=313 => return "West Northwest",
+        314..=315 => return "Northwest",
+        316..=336 => return "North Northewest",
+        337..=360 => return "North",
+        _ => return "Error getting wind direction",
+    }
+}
+
+fn kelvin_to_celcius(kel: f64) -> f64 {
+    kel - 273.15
+}
+
+fn convert_timestamp_to_utc_date(timestamp: i64) -> chrono::DateTime<chrono::Utc> {
+    let naive_datetime = NaiveDateTime::from_timestamp(timestamp, 0);
+    let datetime_again: DateTime<Utc> = DateTime::from_utc(naive_datetime, Utc);
+
+    datetime_again
+}
+
 #[tokio::main]
 async fn main() -> Result<(), ExitFailure> {
     let args = Cli::from_args();
     let response = Forecast::get(&args.city, &args.country_code, &args.api_key).await?;
     println!(
-        "City: {}\nCountry Code: {}\nHumidity: {}%\nWeather Description: {}\n",
+        "City: {}\nCountry Code: {}\nHumidity: {}%\nWeather Description: {}\nWind Speed: {:.2}kmh\nWind Direction: {}\nTemperature: {:.2}°C\nMinimum Temperature: {:.2}°C\nMaximum Temperature: {:.2}°C\nFeels Like: {:.2}°C\nSunrise: {}\nSunset: {}",
         response.name,
         response.sys.country,
         response.main.humidity,
-        response.weather.details.description
+        response.weather.details.description,
+        miles_per_second_to_kmh(response.wind.speed),
+        degrees_to_compass(response.wind.deg),
+        kelvin_to_celcius(response.main.temp),
+        kelvin_to_celcius(response.main.temp_min),
+        kelvin_to_celcius(response.main.temp_max),
+        kelvin_to_celcius(response.main.feels_like),
+        convert_timestamp_to_utc_date(response.sys.sunrise),
+        convert_timestamp_to_utc_date(response.sys.sunset)
     );
     Ok(())
 }
