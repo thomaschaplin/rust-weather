@@ -137,7 +137,7 @@ async fn main() -> Result<(), ExitFailure> {
     let args = Cli::from_args();
     let response = Forecast::get(&args.city, &args.country_code, &args.api_key).await?;
     println!(
-        "City: {}\nCountry Code: {}\nHumidity: {}%\nWeather Description: {}\nWind Speed: {:.2}kmh\nWind Direction: {}\nTemperature: {:.2}°C\nMinimum Temperature: {:.2}°C\nMaximum Temperature: {:.2}°C\nFeels Like: {:.2}°C\nSunrise: {}\nSunset: {}",
+        "City: {}\nCountry Code: {}\nHumidity: {}%\nWeather Description: {}\nWind Speed: {:.0}kmh\nWind Direction: {}\nTemperature: {:.0}°C\nMinimum Temperature: {:.0}°C\nMaximum Temperature: {:.0}°C\nFeels Like: {:.0}°C\nSunrise: {}\nSunset: {}",
         response.name,
         response.sys.country,
         response.main.humidity,
