@@ -1,4 +1,4 @@
-# rusty-weather
+# rust-weather
 
 Simple weather cli written in [rust](https://www.rust-lang.org/)
 
@@ -10,8 +10,8 @@ Get an API key from [OpenWeather](https://openweathermap.org/)
 
 ## Instructions
 
-* Clone this repository `git clone git@github.com:thomaschaplin/rusty-weather.git`
-* Change directory `cd rusty-weather`
+* Clone this repository `git clone git@github.com:thomaschaplin/rust-weather.git`
+* Change directory `cd rust-weather`
 * Build the application `cargo build`
 * Run the application `cargo run <city> <country_code> <api_key>`
 
