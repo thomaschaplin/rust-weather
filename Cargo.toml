@@ -1,5 +1,5 @@
 [package]
-name = "rusty-weather"
+name = "rust-weather"
 version = "0.1.0"
 authors = ["Thomas Chaplin <thomaschaplin@outlook.com>"]
 edition = "2018"
