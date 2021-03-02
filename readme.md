@@ -1,6 +1,6 @@
 # rust-weather
 
-Simple weather cli written in [rust](https://www.rust-lang.org/)
+Simple weather cli written in [rust](https://www.rust-lang.org/) which uses your current location
 
 ## Setup
 
@@ -12,8 +12,20 @@ Get an API key from [OpenWeather](https://openweathermap.org/)
 
 * Clone this repository `git clone git@github.com:thomaschaplin/rust-weather.git`
 * Change directory `cd rust-weather`
+* Create a `.env` file with your OpenWeather API key (see below example)
 * Build the application `cargo build`
-* Run the application `cargo run <city> <country_code> <api_key>`
+* Run the application `cargo run`
+
+### Final Build
+
+* Build the application in release mode `cargo build --release`
+* Execute the `rust-weather` binary file found in `target/release/rust-weather`
+
+
+Example `.env` file
+```
+API_KEY=1234567890
+```
 
 #### Example output:
 
