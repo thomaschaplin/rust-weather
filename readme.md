@@ -1,3 +1,5 @@
+<img src="assets/logo.png" alt="logo" width="300"/>
+
 # rust-weather
 
 Simple weather cli written in [rust](https://www.rust-lang.org/) which uses your current location
@@ -43,3 +45,7 @@ Feels Like: 14°C
 Sunrise: 2020-09-30 05:59:58 UTC
 Sunset: 2020-09-30 17:40:41 UTC
 ```
+
+---
+
+[Weather](https://www.clipartkey.com/view/wbJhxi_transparent-rain-vector-png-sunny-weather-icon-png/) graphic by <a href="https://www.clipartkey.com/upic/5217/">Kineri Luis</a> from ClipArtKey.
