@@ -18,16 +18,15 @@ Get an API key from [OpenWeather](https://openweathermap.org/)
 * Build the application `cargo build`
 * Run the application `cargo run`
 
-### Final Build
-
-* Build the application in release mode `cargo build --release`
-* Execute the `rust-weather` binary file found in `target/release/rust-weather`
-
-
 Example `.env` file
 ```
 API_KEY=1234567890
 ```
+
+### Final Build
+
+* Build the application in release mode `cargo build --release`
+* Execute the `rust-weather` binary file found in `target/release/rust-weather`
 
 #### Example output:
 
