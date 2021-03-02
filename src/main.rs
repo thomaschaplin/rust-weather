@@ -2,14 +2,9 @@ use chrono::prelude::*;
 use exitfailure::ExitFailure;
 use reqwest::Url;
 use serde_derive::{Deserialize, Serialize};
-use structopt::StructOpt;
 
-#[derive(StructOpt)]
-struct Cli {
-    city: String,
-    country_code: String,
-    api_key: String,
-}
+#[macro_use]
+extern crate dotenv_codegen;
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Forecast {
@@ -94,6 +89,14 @@ impl Forecast {
     }
 }
 
+async fn get_location_details_from_ip(option: String) -> Result<String, ExitFailure> {
+    let url = format!("http://ipinfo.io/{}", option);
+    let url = Url::parse(&*url)?;
+    let res = reqwest::get(url).await?;
+    let body = res.text().await?;
+    Ok(body)
+}
+
 fn miles_per_second_to_kmh(inputspeed: f64) -> f64 {
     inputspeed * 3.6
 }
@@ -134,8 +137,15 @@ fn convert_timestamp_to_utc_date(timestamp: i64) -> chrono::DateTime<chrono::Utc
 
 #[tokio::main]
 async fn main() -> Result<(), ExitFailure> {
-    let args = Cli::from_args();
-    let response = Forecast::get(&args.city, &args.country_code, &args.api_key).await?;
+    let country = get_location_details_from_ip(String::from("country")).await?;
+    let city = get_location_details_from_ip(String::from("city")).await?;
+    let api_key = dotenv!("API_KEY");
+    let response = Forecast::get(
+        &String::from(city),
+        &String::from(country),
+        &String::from(api_key),
+    )
+    .await?;
     println!(
         "City: {}\nCountry Code: {}\nHumidity: {}%\nWeather Description: {}\nWind Speed: {:.0}kmh\nWind Direction: {}\nTemperature: {:.0}°C\nMinimum Temperature: {:.0}°C\nMaximum Temperature: {:.0}°C\nFeels Like: {:.0}°C\nSunrise: {}\nSunset: {}",
         response.name,
